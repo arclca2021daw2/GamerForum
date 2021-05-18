@@ -1,0 +1,12 @@
+<p>
+    <a id="linkPerfil" [routerLink]="'/usuari/' + ressenya.autor">
+        <img height="30px" *ngIf="usuari.foto_perfil" [src]="usuari.foto_perfil">
+        <span id="autor">{{usuari.nom}}</span>
+    </a>
+    {{ressenya.data.toDate() | date:"dd/MM/yyyy HH:mm"}}
+</p>
+<div id="ressenya">
+    <h2>{{ressenya.titol}}</h2>
+    <p>{{ressenya.cos}}</p>
+</div>
+

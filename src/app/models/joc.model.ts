@@ -7,7 +7,11 @@ export class Joc {
     desenvolupador: string;
     descripcio: string;
     web: string;
-    portada: string;
+    portada: any;
     imatges: Array<String>;
     preu: number;
+    total_valoracions: number;
+    num_valoracions: number;
+    data_afegit: Date;
+    video: string;
 }

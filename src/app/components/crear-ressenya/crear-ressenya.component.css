@@ -1,0 +1,11 @@
+.example-full-width {
+    width: 90%;
+}
+
+form {
+    margin: 5%;
+}
+
+textarea {
+    height: 250px;
+}

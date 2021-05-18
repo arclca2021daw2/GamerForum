@@ -1,0 +1,16 @@
+<div id="nom">
+    <img *ngIf="usuari.foto_perfil != undefined; else senseFoto" height="80px" [src]="usuari.foto_perfil"/>
+    <ng-template #senseFoto>
+        <img height="80px" [src]="'http://' + urlAPI + '/defaultUser'">
+    </ng-template>
+    <h1>{{usuari.nom}}</h1>
+</div>
+
+<div id="dades">
+    <p>Edat: {{edat}} anys</p>
+    <p>Membre des del: {{usuari.data_registre.toDate() | date: 'dd-MM-yyyy'}}</p>
+    <p>Sexe: {{usuari.sexe | titlecase}}</p>
+    <p>Biografia:</p>
+    <p>{{usuari.biografia}}</p>
+</div>
+

@@ -1,0 +1,92 @@
+.example-full-width {
+    width: 80%;
+}
+
+.btn {
+    width: 170px;
+    margin: 10px;
+}
+
+form {
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+mat-icon {
+    vertical-align: middle;
+}
+
+#avis {
+    color: red;
+    margin-left: 2%;
+}
+
+.btnImatges {
+    width: 170px;
+    margin-bottom: 2%;
+}
+
+#portadaCorrecte {
+    color: green;
+    margin-left: 2%;
+}
+
+#nombreImgs {
+    margin-left: 2%;
+}
+
+.mitat {
+    width: 50%;
+    float: left;
+    height: 370px;
+}
+
+#btnCrear {
+    width: 170px;
+    margin:0 auto;
+    display:block;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#titol {
+    font-size: 20pt;
+    font-weight: bold;
+    margin-left: 5%;
+}
+
+#autorData {
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+#data {
+    margin-left: 20%;
+}
+
+#cos {
+    margin-top: 30px;
+    margin-left: 5%;
+}
+
+#canviMissatges {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#btnAnteriorMissatge {
+    margin-right: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+#files:hover {
+    opacity: 70%;
+    cursor: pointer;
+}

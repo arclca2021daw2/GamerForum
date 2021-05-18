@@ -1,0 +1,12 @@
+<form [formGroup]="ressenyaForm" (ngSubmit)="crear()">
+    <h1>Ressenya</h1>
+    <mat-form-field class="example-full-width">
+        <mat-label>Títol</mat-label>
+        <input type="text" matInput formControlName="titol">
+    </mat-form-field> <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Cos</mat-label>
+        <textarea type="text" matInput formControlName="cos"></textarea>
+    </mat-form-field> <br>
+    <button class="btn" type="submit" mat-raised-button color="accent">Crear</button> <br>
+</form>

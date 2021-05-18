@@ -1,0 +1,19 @@
+#nom {
+    align-items: center;
+    display: flex;
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-bottom: 2%;
+}
+
+h1 {
+    margin-left: 4%;
+    margin-right: 5%;
+}
+
+#dades {
+    margin-left: 10%;
+    margin-top: 5%;
+    margin-right: 10%;
+    text-align: justify;
+}

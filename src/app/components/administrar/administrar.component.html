@@ -1,0 +1,140 @@
+<mat-tab-group>
+  <mat-tab label="Llista de jocs">
+    <table mat-table [dataSource]="jocs" class="mat-elevation-z8">
+      <ng-container  matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td (click)="navegar(element.nom)" mat-cell *matCellDef="let element"> {{element.nom}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="data_afegit">
+        <th mat-header-cell *matHeaderCellDef> Data afegit </th>
+        <td (click)="navegar(element.nom)" mat-cell *matCellDef="let element"> {{element.data_afegit.toDate() | date:"dd/MM/yyyy"}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="desenvolupador">
+        <th mat-header-cell *matHeaderCellDef> Desenvolupador </th>
+        <td (click)="navegar(element.nom)" mat-cell *matCellDef="let element"> {{element.desenvolupador}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="web">
+        <th mat-header-cell *matHeaderCellDef> Web </th>
+        <td (click)="navegar(element.nom)" mat-cell *matCellDef="let element"> {{element.web}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="preu">
+        <th mat-header-cell *matHeaderCellDef> Preu </th>
+        <td (click)="navegar(element.nom)" mat-cell *matCellDef="let element"> {{element.preu}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="esborrar">
+        <th mat-header-cell *matHeaderCellDef> Esborrar </th>
+        <td mat-cell *matCellDef="let element; let i = index"> 
+          <button mat-button (click)="delete(i)"><mat-icon>delete</mat-icon></button> 
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr id="files" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Afegir joc">
+    <form [formGroup]="checkoutForm">
+      <div class="mitat">
+        <mat-form-field class="example-full-width">
+          <mat-label>Nom</mat-label>
+          <input type="text" matInput formControlName="nom">
+        </mat-form-field> <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Plataformes</mat-label>
+          <mat-select formControlName="plataformes" multiple>
+            <mat-option *ngFor="let plat of llistaPlataformes" [value]="plat.id">{{plat.nom}}</mat-option>
+          </mat-select>
+        </mat-form-field> <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Categories</mat-label>
+          <mat-select formControlName="categories" multiple>
+            <mat-option *ngFor="let cat of llistaCategories" [value]="cat">{{cat}}</mat-option>
+          </mat-select>
+        </mat-form-field> <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Data llançament</mat-label>
+          <input type="date" matInput formControlName="data_llansament">
+        </mat-form-field> <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Desenvolupador</mat-label>
+          <input type="text" matInput formControlName="desenvolupador">
+        </mat-form-field> <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Descripció</mat-label>
+          <textarea type="text" matInput formControlName="descripcio"></textarea>
+        </mat-form-field> <br>
+      </div>
+
+      <div class="mitat">
+        <mat-form-field class="example-full-width">
+          <mat-label>Web</mat-label>
+          <input type="text" matInput formControlName="web">
+        </mat-form-field> <br>
+
+        <button class="btnImatges" (click)="pujarPortada()" mat-raised-button color="primary">Foto de portada</button>
+        <span id="avis" *ngIf="portada == ''; else tePortada">
+          <mat-icon>warning</mat-icon>
+          Falta una foto de portada
+        </span>
+        <ng-template #tePortada>
+          <mat-icon id="portadaCorrecte">check_circle</mat-icon>
+        </ng-template>
+        <br>
+
+        <button class="btnImatges" (click)="pujarImgs()" mat-raised-button color="primary">Imatges</button>
+        <span id="nombreImgs" *ngIf="imgs.length > 0">Imatges seleccionades: {{imgs.length}}</span>
+        <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Preu</mat-label>
+          <input type="number" matInput formControlName="preu">
+        </mat-form-field> <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>URL Vídeo Youtube (només la cadena del final)</mat-label>
+          <input type="text" matInput formControlName="video">
+        </mat-form-field> <br>
+      </div>
+      <div class="clearfix"></div>
+      <button *ngIf="portada != ''" id="btnCrear" mat-raised-button color="accent" (click)="onSubmit()">Crear</button>
+
+    </form>
+  </mat-tab>
+  <mat-tab label="Missatges">
+    <div *ngIf="missatges.length > 0; else senseMissatges">
+      <h1>Missatges per respondre: {{missatges.length}}</h1>
+      <p id="titol">{{missatges[missatgeActual].titol}}</p>
+      <p id="autorData">
+        <span>{{missatges[missatgeActual].autor}}</span>
+        <span id="data">{{missatges[missatgeActual].data.toDate() | date:"dd/MM/yyyy HH:mm"}}</span>
+      </p>
+      <p id="cos">{{missatges[missatgeActual].cos}}</p>
+      <form [formGroup]="respostaForm" (ngSubmit)="respondre()">
+        <mat-form-field class="example-full-width">
+          <mat-label>Resposta</mat-label>
+          <textarea formControlName="resposta" matInput></textarea>
+        </mat-form-field><br>
+        <button type="submit" mat-raised-button color="accent">Respondre</button>
+      </form>
+      <div id="canviMissatges">
+        <button id="btnAnteriorMissatge" *ngIf="missatgeActual > 0" (click)="canviarMissatge('anterior')"
+          mat-raised-button color="primary">Anterior</button>
+        <button *ngIf="missatgeActual < missatges.length - 1" (click)="canviarMissatge('seguent')" mat-raised-button
+          color="primary">Següent</button>
+      </div>
+    </div>
+    <ng-template #senseMissatges>
+      <h1>Sense missatges</h1>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>

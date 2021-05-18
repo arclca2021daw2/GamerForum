@@ -1,0 +1,17 @@
+<h1>Nou missatge</h1>
+
+<form [formGroup]="missatgeForm" (ngSubmit)="enviar()">
+    <mat-form-field id="titol">
+      <mat-label>Títol</mat-label>
+      <input type="text" matInput formControlName="titol">
+    </mat-form-field> <br>
+    <mat-form-field id="cos">
+        <mat-label>Cos</mat-label>
+        <textarea matInput formControlName="cos"></textarea>
+    </mat-form-field> <br>
+    <button class="btn" type="submit" mat-raised-button color="accent">Enviar</button> <br>
+    <div id="avis">
+        <mat-icon>warning</mat-icon>
+        <span>Enviar un missatge esborrarà el teu missatge anterior</span>
+    </div>
+  </form>

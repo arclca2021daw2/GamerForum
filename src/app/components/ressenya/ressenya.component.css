@@ -1,0 +1,31 @@
+h1 {
+    text-align: center;
+    margin-top: 15px;
+}
+
+img {
+    border-radius: 30px;
+    vertical-align: middle;
+    margin-left: 7%;
+    margin-right: 5px;
+}
+
+#autor {
+    margin-right: 5%;
+}
+
+#ressenya {
+    margin-left: 7%;
+    margin-top: 5%;
+    margin-right: 7%;
+    text-align: justify;
+}
+
+a {
+    margin-top: 20px;
+}
+
+#linkPerfil {
+    color: white;
+    text-decoration: none;
+}

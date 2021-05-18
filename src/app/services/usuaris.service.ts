@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Usuari } from 'src/app/usuari.model';
+import { Usuari } from 'src/app/models/usuari.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,21 @@ export class UsuarisService {
     return this.firestore.collection('usuaris').snapshotChanges();
   }
 
+  async getUsuariByCorreu(correu: string) {
+    let data;
+    await this.firestore.collection('usuaris').ref.doc(correu).get().then(doc => {
+      data = doc.data();
+    });
+    return data;
+  }
+
   createUsuari(usuari: Usuari) {
-    return this.firestore.collection('usuaris').add(usuari);
+    delete usuari.passwd;
+    return this.firestore.collection('usuaris').doc(usuari.correu).set(usuari);
   }
 
   updateUsuari(usuari: Usuari) {
-    delete usuari.id;
-    this.firestore.doc('usuaris/' + usuari.id).update(usuari);
+    this.firestore.doc('usuaris/' + usuari.correu).update(usuari);
   }
 
   deleteUsuari(usuariId: string) {

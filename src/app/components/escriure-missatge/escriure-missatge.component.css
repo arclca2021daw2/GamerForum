@@ -1,0 +1,37 @@
+h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#titol {
+    width: 50%;
+    line-height: 20px;
+    font-size: 20px;
+}
+
+#cos {
+    width: 90%;
+}
+
+textarea {
+    height: 200px;
+}
+
+.btn {
+    width: 170px;
+    margin: 10px;
+}
+
+form {
+    margin-left: 10%;
+}
+
+mat-icon {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+#avis {
+    margin-top: 10px;
+    color: yellow;
+}

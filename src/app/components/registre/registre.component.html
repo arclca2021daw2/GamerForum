@@ -1,0 +1,36 @@
+<h1>Registre</h1>
+
+<form [formGroup]="registreForm" (ngSubmit)="registre()">
+    <mat-form-field class="example-full-width">
+        <mat-label>Nom</mat-label>
+        <input type="text" matInput formControlName="nom">
+    </mat-form-field> <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Correu</mat-label>
+        <input type="email" matInput formControlName="correu">
+    </mat-form-field> <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Contrasenya</mat-label>
+        <input type="password" matInput formControlName="passwd">
+    </mat-form-field> <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Data de naixement</mat-label>
+        <input type="date" matInput formControlName="data_naixement">
+    </mat-form-field> <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Biografia</mat-label>
+        <textarea type="text" matInput formControlName="biografia"></textarea>
+    </mat-form-field> <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Sexe</mat-label>
+        <mat-select formControlName="sexe">
+            <mat-option value="home">Home</mat-option>
+            <mat-option value="dona">Dona</mat-option>
+            <mat-option value="altres">Altres</mat-option>
+        </mat-select>
+    </mat-form-field> <br>
+    <label for="foto_perfil">Foto de perfil (opcional)</label>
+    <input type="file" (change)="pujarFoto($event)" accept=".png,.jpg" id="foto_perfil"> <br>
+    <button class="btn" type="submit" mat-raised-button color="accent">Registrar-se</button> <br>
+    <a class="btn" mat-raised-button color="primary" routerLink="/login">Iniciar Sessió</a>
+</form>

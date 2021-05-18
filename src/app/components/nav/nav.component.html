@@ -1,0 +1,39 @@
+<mat-toolbar>
+  <button id="logo" mat-button (click) ="navegar('')">
+    <span>Gamer Forum</span>
+  </button>
+  <span class="example-spacer"></span>
+
+  <form [formGroup]="buscaForm" (submit)="submit()" class="example-form">
+    <mat-form-field *ngIf="logged == true" class="example-full-width">
+      <mat-label>Buscar</mat-label>
+      <input type="text" placeholder="Nom" aria-label="Number" matInput minlength="1" formControlName="nom"
+        [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let joc of jocs" [value]="joc.nom">
+          <div id="img">
+            <img height="35px" [src]="joc.portada">
+          </div>
+          {{joc.nom}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+
+  <span class="example-spacer"></span>
+
+  <div *ngIf="logged == true">    
+    <button mat-icon-button (click)="navegar('')">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-icon-button (click)="navegar('/perfil')">
+      <mat-icon>person</mat-icon>
+    </button>
+    <button *ngIf="admin == true" mat-icon-button (click)="navegar('/adminJocs')">
+      <mat-icon>settings</mat-icon>
+    </button>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

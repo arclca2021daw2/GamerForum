@@ -1,0 +1,17 @@
+<h1>Iniciar Sessió</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Correu</mat-label>
+    <input type="email" matInput formControlName="correu">
+  </mat-form-field> <br>
+  <mat-form-field class="example-full-width">
+    <mat-label>Contrasenya</mat-label>
+    <input type="password" matInput formControlName="passwd">
+  </mat-form-field> <br>
+  <button class="btn" type="submit" mat-raised-button color="accent">Iniciar Sessió</button> <br>
+  <a class="btn" mat-raised-button color="primary" routerLink="/registre">Registrar-se</a>
+  <a class="btn" mat-raised-button color="warn" routerLink="/reset-passwd">Recuperar contrasenya</a>
+</form>
+
+

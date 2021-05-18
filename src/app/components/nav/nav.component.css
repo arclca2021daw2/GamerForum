@@ -1,0 +1,35 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+mat-toolbar {
+    background-color: #9c27b0;
+}
+
+#boto-menu {
+    margin-left: 3%;
+}
+
+#boto-menu button {
+    margin-left: 3%;
+}
+
+.example-full-width {
+    width: 300px;
+}
+
+img {
+    vertical-align: middle;
+    
+}
+
+#img {
+    width: 20%;
+    display: inline-block;
+    text-align: center;
+    margin-right: 5%;
+}
+
+#logo {
+    font-size: 14pt;
+}

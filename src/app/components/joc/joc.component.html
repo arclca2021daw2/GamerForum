@@ -1,0 +1,167 @@
+<div *ngIf="joc == undefined; then carregant else carregat"></div>
+<ng-template #carregant>Carregant...</ng-template>
+<ng-template #carregat>
+    <div id="titol">
+        <img height="100px" [src]="joc.portada" />
+        <h1>{{joc.nom}}</h1>
+    </div>
+
+    <mat-tab-group id="tabGroup" (selectedTabChange)="onTabChanged($event)">
+        <mat-tab label="Imatges i tràiler">
+            <div id="videoImg">
+                <iframe width="560" height="315" [src]="getVideo(joc.video)" title="Tràiler del joc" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+
+                <div id="imgFletxes" *ngIf="joc.imatges.length > 0">
+                    <img id="imatge" height="315px" [src]="joc.imatges[imatgeActual]">
+                    <div id="fletxes">
+                        <div *ngIf="joc.imatges.length > 1">
+                            <button mat-icon-button (click)="canviarImatge('before')">
+                                <mat-icon>navigate_before</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="canviarImatge('next')">
+                                <mat-icon>navigate_next</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="Informació">
+            <mat-list>
+                <mat-list-item class="li">
+                    <span matLine>
+                        <mat-icon>category</mat-icon>
+                        Categories:
+                    </span>
+                    <div matLine>
+                        <span id="categoria" *ngFor="let cat of joc.categories">
+                            {{cat}}
+                        </span>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item id="plataformes" class="li">
+                    <span matLine>
+                        <mat-icon>videogame_asset</mat-icon>
+                        Plataformes:
+                    </span>
+                    <div matLine>
+                        <span *ngFor="let plat of joc.plataformes">
+                            <img id="imgPlataforma" height="50px"
+                                [src]="'http://' + urlAPI + '/img/plataformes/' + plat">
+                        </span>
+                    </div>
+
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="li">
+                    <mat-icon>date_range</mat-icon>
+                    Data llançament: {{joc.data_llansament | date:"dd/MM/yyyy"}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="li">
+                    <mat-icon>insert_link</mat-icon>
+                    <a [href]="joc.web">Pàgina Web</a>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="li">
+                    <mat-icon>sell</mat-icon>
+                    <span *ngIf="joc.preu != 0; else gratis">
+                        Preu: {{joc.preu}}
+                    </span>
+                    <ng-template #gratis>Gratuït</ng-template>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="li">
+                    <button id="descripcio" mat-raised-button color="primary" (click)="mostrarDescripcio()">
+                        <mat-icon>article</mat-icon>
+                        Descripció
+                    </button>
+                </mat-list-item>
+            </mat-list>
+        </mat-tab>
+        <mat-tab label="Valoracions i ressenyes">
+            <div class="mitat">
+                <div *ngIf="valoracioJoc != -1; else senseValoracio">
+                    <h2>Valoracions dels usuaris</h2> <br>
+                    <span id="nota" class="vermell" *ngIf="valoracioJoc < 2">
+                        {{valoracioJoc | number:'1.1-1'}}<mat-icon id="estrella" [inline]="true">star_rate</mat-icon>
+                    </span>
+                    <span id="nota" class="taronja" *ngIf="valoracioJoc >= 2 && valoracioJoc <= 3.5">
+                        {{valoracioJoc | number:'1.1-1'}}<mat-icon id="estrella" [inline]="true">star_rate</mat-icon>
+                    </span>
+                    <span id="nota" class="verd" *ngIf="valoracioJoc > 3.5">
+                        {{valoracioJoc | number:'1.1-1'}}<mat-icon id="estrella" [inline]="true">star_rate</mat-icon>
+                    </span>
+                    en {{joc.num_valoracions}} valoracions
+                </div>
+                <ng-template #senseValoracio>
+                    <p>Aquest joc encara no té valoracions, sigues el primer!</p>
+                </ng-template>
+                <div *ngIf="nota == undefined; else hiHaNota" id="estrellesValoracio">
+                    <p>Deixa la teva valoració:</p>
+                    <mat-icon (mouseleave)="endhover()" (mouseover)="hover($event)" (click)="valorar($event)"
+                        class="estrellaValoracio" id="1" [inline]="true">star_rate</mat-icon>
+                    <mat-icon (mouseleave)="endhover()" (mouseover)="hover($event)" (click)="valorar($event)"
+                        class="estrellaValoracio" id="2" [inline]="true">star_rate</mat-icon>
+                    <mat-icon (mouseleave)="endhover()" (mouseover)="hover($event)" (click)="valorar($event)"
+                        class="estrellaValoracio" id="3" [inline]="true">star_rate</mat-icon>
+                    <mat-icon (mouseleave)="endhover()" (mouseover)="hover($event)" (click)="valorar($event)"
+                        class="estrellaValoracio" id="4" [inline]="true">star_rate</mat-icon>
+                    <mat-icon (mouseleave)="endhover()" (mouseover)="hover($event)" (click)="valorar($event)"
+                        class="estrellaValoracio" id="5" [inline]="true">star_rate</mat-icon>
+                </div>
+                <ng-template #hiHaNota>
+                    La teva valoració: <br>
+                    <div id="estrellesValoracio">
+                        <mat-icon class="estrellaValoracio" id="1" [inline]="true">star_rate</mat-icon>
+                        <mat-icon class="estrellaValoracio" id="2" [inline]="true">star_rate</mat-icon>
+                        <mat-icon class="estrellaValoracio" id="3" [inline]="true">star_rate</mat-icon>
+                        <mat-icon class="estrellaValoracio" id="4" [inline]="true">star_rate</mat-icon>
+                        <mat-icon class="estrellaValoracio" id="5" [inline]="true">star_rate</mat-icon>
+                    </div>
+                </ng-template>
+            </div>
+            <div class="mitat" id="ressenyes">
+                <div *ngIf="ressenyes.length > 0; else senseRessenyes">
+                    <h1>Ressenyes dels usuaris</h1>
+                    <mat-list role="list">
+                        <mat-list-item class="liRessenya" (click)="navegarRessenya(ressenya.autor)" role="listitem" *ngFor="let ressenya of ressenyes | slice: ressenyaInici:ressenyaFinal; index as i">
+                            <span class="itemRessenya">
+                                {{ressenya.titol}}
+                            </span>
+                            <span class="itemRessenya">
+                                {{ressenya.data.toDate() | date:"dd/MM/yyyy"}}
+                            </span>  
+                            <span class="itemRessenya">
+                                {{ressenya.nom}}
+                            </span>
+                            <mat-divider *ngIf="i + 1 != ressenyes.length"></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
+                    <div class="botons" *ngIf="ressenyes.length > 4">
+                        <button mat-raised-button color="primary" (click)="anterior()" *ngIf="ressenyaInici != 0">
+                            Anterior
+                        </button>
+                        <button mat-raised-button color="primary" (click)="seguent()"  *ngIf="ressenyaFinal == ressenyes.length || ressenyaFinal == ressenyes.length - 1 || ressenyaFinal == ressenyes.length - 2 || ressenyaFinal == ressenyes.length -3">
+                            Següent
+                        </button>
+                    </div>
+                </div>
+                <ng-template #senseRessenyes>
+                    Encara no hi ha cap ressenya feta, sigues el primer! <br>
+                </ng-template>
+                <button id="ressenyaBtn" mat-raised-button color="primary" (click)="crearRessenya()" *ngIf="ressenyaFeta == true; else usuariNoHaFetRessenya">
+                    Edita la teva ressenya
+                </button>
+                <ng-template #usuariNoHaFetRessenya>
+                    <button id="ressenyaBtn" mat-raised-button color="primary" (click)="crearRessenya()">
+                        Nova ressenya
+                    </button>
+                </ng-template>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</ng-template>

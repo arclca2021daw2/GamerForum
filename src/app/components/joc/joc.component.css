@@ -1,0 +1,137 @@
+#titol {
+    align-items: center;
+    display: flex;
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-bottom: 2%;
+}
+
+h1 {
+    margin-left: 4%;
+    margin-right: 5%;
+}
+
+#fletxes {
+    text-align: center;
+}
+
+iframe {
+    display: inline-block;
+}
+
+#videoImg {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+#imgFletxes {
+    display: inline-block;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height:fit-content;
+}
+
+.li {
+    height: 30px;
+    line-height: 30px;
+}
+
+a {
+    color: white;
+}
+
+mat-icon {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#imgPlataforma {
+    vertical-align: middle;
+    margin-right: 50px;
+    background-color: #ccc;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 25px;
+}
+
+#plataformes {
+    height: 100px;
+}
+
+#categoria {
+    margin-left: 40px;
+}
+
+.vermell {
+    color: red;
+}
+
+.taronja {
+    color: orangered;
+}
+
+.verd {
+    color: green;
+}
+
+#nota {
+    font-size: 80px;
+    line-height: 75px;
+    height: 85px;
+}
+
+#estrella {
+    font-size: 65px;
+}
+
+.estrellaValoracio {
+    font-size: 50px !important;
+}
+
+#tabGroup {
+    height: 100%;
+}
+
+#estrellesValoracio {
+    margin-top: 15px;
+}
+
+#estrellesValoracio:hover {
+    cursor:default;
+}
+
+.mitat {
+    width: 40%;
+    
+    float: left;
+    margin-left: 25px;
+    margin-top: 25px;
+}
+
+.itemRessenya {
+    width: 33%;
+}
+
+.liRessenya:hover {
+    background-color: #3E3E3E;
+    cursor: pointer;
+}
+
+#ressenyaBtn {
+    margin: 15px;
+}
+
+.botons {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+#descripcio {
+    font-size: 12pt;
+}
