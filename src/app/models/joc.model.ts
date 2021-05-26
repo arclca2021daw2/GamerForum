@@ -1,5 +1,4 @@
 export class Joc {
-    id: string;
     nom: string;
     plataformes: Array<String>;
     categories: Array<String>;

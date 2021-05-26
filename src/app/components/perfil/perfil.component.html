@@ -3,9 +3,12 @@
 <ng-template #carregat>
     <div class="part">
         <h1 class="margeEsquerra">Editar perfil</h1>
-        <img matTooltip="Canviar foto de perfil" matTooltipPosition="right" class="margeEsquerra" (click)="canviarFoto()" height="150px" *ngIf="usuari.foto_perfil; else senseFoto" [src]="usuari.foto_perfil">
+        <img matTooltip="Canviar foto de perfil" matTooltipPosition="right" class="margeEsquerra"
+            (click)="canviarFoto()" height="150px" *ngIf="usuari.foto_perfil; else senseFoto"
+            [src]="usuari.foto_perfil">
         <ng-template #senseFoto>
-            <button class="margeEsquerra" (click)="novaFoto()" mat-raised-button color="primary">Afegir foto de perfil</button> 
+            <button class="margeEsquerra" (click)="novaFoto()" mat-raised-button color="primary">Afegir foto de
+                perfil</button>
         </ng-template><br><br>
         <form class="margeEsquerra" [formGroup]="perfilForm" (ngSubmit)="guardar()">
             <mat-form-field class="example-full-width">
@@ -24,11 +27,12 @@
                     <mat-option value="altres">Altres</mat-option>
                 </mat-select>
             </mat-form-field> <br>
-            
+
             <button class="btn" type="submit" mat-raised-button color="accent">Guardar</button>
-            <button class="btn" type="reset" mat-raised-button color="warn">Descartar</button>
+
+            <a class="btn" mat-raised-button color="primary"
+                [routerLink]="'/usuari/' + usuari.nom">Veure perfil</a>
         </form>
-        <a id="veurePerfil" class="btn" mat-raised-button color="primary" [routerLink]="'/usuari/' + usuari.correu">Veure perfil</a>
     </div>
     <div class="part">
         <h1>Missatges a l'administrador</h1>
@@ -47,7 +51,7 @@
                         {{missatge.cos}}
                     </p>
                     <mat-divider></mat-divider> <br>
-                    <div *ngIf="missatge.resposta != ''; else senseResposta">             
+                    <div *ngIf="missatge.resposta != ''; else senseResposta">
                         <mat-icon>chat</mat-icon>
                         Admin: <br> <br>
                         {{missatge.resposta}}
@@ -63,6 +67,6 @@
         <ng-template #senseMissatges>
             Sense missatges
         </ng-template>
-        <br><button (click)="enviarMissatge()" class="btn" mat-raised-button color="primary">Nou missatge</button> 
+        <br><button (click)="enviarMissatge()" class="btn" mat-raised-button color="primary">Nou missatge</button>
     </div>
 </ng-template>

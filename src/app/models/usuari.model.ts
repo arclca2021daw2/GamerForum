@@ -1,5 +1,4 @@
 export class Usuari {
-    id: string;
     nom: string;
     correu: string;
     data_naixement: Date;

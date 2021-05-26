@@ -13,8 +13,8 @@
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
 
-                <div id="imgFletxes" *ngIf="joc.imatges.length > 0">
-                    <img id="imatge" height="315px" [src]="joc.imatges[imatgeActual]">
+                <div id="divImg" *ngIf="joc.imatges.length > 0">
+                    <img id="imatge" [src]="joc.imatges[imatgeActual]">
                     <div id="fletxes">
                         <div *ngIf="joc.imatges.length > 1">
                             <button mat-icon-button (click)="canviarImatge('before')">
@@ -42,14 +42,14 @@
                     </div>
                 </mat-list-item>
                 <mat-divider></mat-divider>
-                <mat-list-item id="plataformes" class="li">
+                <mat-list-item id="plataformes">
                     <span matLine>
                         <mat-icon>videogame_asset</mat-icon>
                         Plataformes:
                     </span>
                     <div matLine>
                         <span *ngFor="let plat of joc.plataformes">
-                            <img id="imgPlataforma" height="50px"
+                            <img id="imgPlataforma" height="30px"
                                 [src]="'http://' + urlAPI + '/img/plataformes/' + plat">
                         </span>
                     </div>
@@ -142,10 +142,10 @@
                         </mat-list-item>
                     </mat-list>
                     <div class="botons" *ngIf="ressenyes.length > 4">
-                        <button mat-raised-button color="primary" (click)="anterior()" *ngIf="ressenyaInici != 0">
+                        <button class="paginacioRessenya" mat-raised-button color="primary" (click)="anterior()" *ngIf="ressenyaInici != 0">
                             Anterior
                         </button>
-                        <button mat-raised-button color="primary" (click)="seguent()"  *ngIf="ressenyaFinal == ressenyes.length || ressenyaFinal == ressenyes.length - 1 || ressenyaFinal == ressenyes.length - 2 || ressenyaFinal == ressenyes.length -3">
+                        <button class="paginacioRessenya" mat-raised-button color="primary" (click)="seguent()"  *ngIf="ressenyaFinal != ressenyes.length && ressenyaFinal != ressenyes.length + 1 && ressenyaFinal != ressenyes.length + 2 && ressenyaFinal != ressenyes.length + 3">
                             Següent
                         </button>
                     </div>

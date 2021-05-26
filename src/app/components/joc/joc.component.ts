@@ -99,12 +99,12 @@ export class JocComponent implements OnInit {
     return this._sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + url);
   }
 
-  valorar(e) {
+  async valorar(e) {
     let nota = parseInt(e.target.id);
     this.joc.total_valoracions+= nota;
     this.joc.num_valoracions++;
     this.jocsService.updateJoc(this.joc);
-    this.firestore.collection('valoracions').doc(`${this.joc.nom}-${this.usuari.correu}`).set({
+    await this.firestore.collection('valoracions').doc(`${this.joc.nom}-${this.usuari.correu}`).set({
       nota: nota,
       joc: this.joc.nom
     });

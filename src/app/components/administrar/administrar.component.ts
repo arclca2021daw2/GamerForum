@@ -59,7 +59,7 @@ export class AdministrarComponent implements OnInit {
     this.jocsService.getJocs().subscribe(data => {
       this.jocs = data.map(e => {
         return {
-          id: e.payload.doc.id,
+         
           ...e.payload.doc.data() as {}
         } as Joc;
       })
@@ -92,7 +92,7 @@ export class AdministrarComponent implements OnInit {
             joc.imatges.push(url);
           }).then(() => {
             if (i == this.imgs.length - 1) {
-              this.jocsService.createJoc(joc);
+              setTimeout(() => this.jocsService.createJoc(joc), 2000);
             }
           });
         });

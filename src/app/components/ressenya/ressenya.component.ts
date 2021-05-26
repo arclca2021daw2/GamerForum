@@ -1,6 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Usuari } from 'src/app/models/usuari.model';
 
 @Component({
@@ -16,8 +17,10 @@ export class RessenyaComponent implements OnInit {
   usuariCorreu: string;
   constructor(
     private firestore: AngularFirestore,
+    private router: Router,
     public dialogRef: MatDialogRef<RessenyaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data
+    @Inject(MAT_DIALOG_DATA) public data,
+    private ngZone: NgZone
   ) {
     this.joc = data.joc;
     this.usuariCorreu = data.usuari;
@@ -33,4 +36,8 @@ export class RessenyaComponent implements OnInit {
     })
   }
 
+  navegar() {
+    this.dialogRef.close();
+    this.router.navigateByUrl(`/usuari/${this.usuari.nom}`);
+  }
 }

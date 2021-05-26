@@ -10,6 +10,8 @@ import  { Router } from '@angular/router';
 })
 export class PaginaPrincipalComponent implements OnInit {
   jocs: Joc[];
+  jocsData: Joc[];
+  jocsValoracio: Joc[];
   iniciNous: number;
   finalNous: number;
   iniciValoracio: number;
@@ -28,10 +30,22 @@ export class PaginaPrincipalComponent implements OnInit {
     this.jocsService.getJocs().subscribe(data => {
       this.jocs = data.map(e => {
         return {
-          id: e.payload.doc.id,
+         
           ...e.payload.doc.data() as{}
         } as Joc;
-      })
+      });
+      this.jocsData = data.map(e => {
+        return {
+         
+          ...e.payload.doc.data() as{}
+        } as Joc;
+      });
+      this.jocsValoracio = data.map(e => {
+        return {
+         
+          ...e.payload.doc.data() as{}
+        } as Joc;
+      });
     });
   }
 

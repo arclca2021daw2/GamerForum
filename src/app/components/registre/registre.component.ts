@@ -63,7 +63,7 @@ export class RegistreComponent implements OnInit {
     this.foto_perfil = e.target.files[0];
   }
 
-  registre() {
+  async registre() {
     if (this.registreForm.valid) {
       let existeix = false;
       this.nomsUsuaris.forEach(us => {
@@ -75,10 +75,12 @@ export class RegistreComponent implements OnInit {
       const ref = this.firestore.collection('usuaris').ref.doc(this.registreForm.value.correu);
 
       ref.get()
-        .then(doc => {
+        .then(async (doc) => {
           if (!doc.exists) {
-            this.authService.SignUp(this.registreForm.value.correu, this.registreForm.value.passwd);
-            this.create(this.registreForm.value);
+            let correcte = await this.authService.SignUp(this.registreForm.value.correu, this.registreForm.value.passwd);
+            if (correcte) {
+              this.create(this.registreForm.value);
+            }
           } else {
             alert('Ja hi ha un usuari amb aquest correu!');
           }

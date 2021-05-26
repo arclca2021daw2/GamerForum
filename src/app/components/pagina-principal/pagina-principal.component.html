@@ -1,62 +1,71 @@
-<div class="mitat">
-    <h1>Nous</h1> <br>
-    <mat-list>
-        <mat-list-item *ngFor="let joc of jocs | slice: iniciNous:finalNous | ordenarData">
-            <mat-card (click)="navegar(joc.nom)">
-                <mat-card-header>
-                    <img mat-card-avatar [src]="joc.portada">
-                    <mat-card-title>
-                        <span>{{joc.nom}}</span>
-                    </mat-card-title>
-                    <mat-card-subtitle>
-                        <span *ngIf="joc.num_valoracions > 0; else noValoracions" id="valoracio">{{joc.total_valoracions
-                            / joc.num_valoracions | number:'1.1-1'}} ⭐</span>
-                        <ng-template #noValoracions><span id="valoracio">Cap valoració</span></ng-template>
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>Afegit el: {{joc.data_afegit.toDate() | date:"dd/MM/yyyy"}}</p>
-                </mat-card-content>
-            </mat-card>
-        </mat-list-item>
-    </mat-list>
-    <div class="botons" *ngIf="jocs.length > 4">
-        <button mat-raised-button color="primary" (click)="anterior('nous')" *ngIf="iniciNous != 0">
-            Anterior
-        </button>
-        <button mat-raised-button color="primary" (click)="seguent('nous')"  *ngIf="finalNous == jocs.length || finalNous == jocs.length - 1 || finalNous == jocs.length - 2 || finalNous == jocs.length -3">
-            Següent
-        </button>
-    </div>
+<div *ngIf="jocs == undefined; else carregat">
+    Carregant...
 </div>
-<div class="mitat">
-    <h1>Millor valoració</h1> <br>
-    <mat-list>
-        <mat-list-item *ngFor="let joc of jocs | slice: iniciValoracio:finalValoracio | ordenarValoracio">
-            <mat-card (click)="navegar(joc.id)">
-                <mat-card-header>
-                    <img mat-card-avatar [src]="joc.portada">
-                    <mat-card-title>
-                        <span>{{joc.nom}}</span>
-                    </mat-card-title>
-                    <mat-card-subtitle>
-                        <span *ngIf="joc.num_valoracions > 0; else noValoracions" id="valoracio">{{joc.total_valoracions
-                            / joc.num_valoracions | number:'1.1-1'}} ⭐</span>
-                        <ng-template #noValoracions><span id="valoracio">Cap valoració</span></ng-template>
-                    </mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <p>Afegit el: {{joc.data_afegit.toDate() | date:"dd/MM/yyyy"}}</p>
-                </mat-card-content>
-            </mat-card>
-        </mat-list-item>
-    </mat-list>
-    <div class="botons" *ngIf="jocs.length > 4">
-        <button mat-raised-button color="primary" (click)="anterior('valoracio')" *ngIf="iniciValoracio != 0">
-            Anterior
-        </button>
-        <button mat-raised-button color="primary" (click)="seguent('valoracio')"  *ngIf="finalValoracio == jocs.length || finalValoracio == jocs.length - 1 || finalValoracio == jocs.length - 2 || finalValoracio == jocs.length -3">
-            Següent
-        </button>
+<ng-template #carregat>
+    <div class="mitat">
+        <h1>Nous</h1> <br>
+        <mat-list>
+            <mat-list-item *ngFor="let joc of jocsData | ordenarData | slice: iniciNous:finalNous">
+                <mat-card (click)="navegar(joc.nom)">
+                    <mat-card-header>
+                        <img mat-card-avatar [src]="joc.portada">
+                        <mat-card-title>
+                            <span>{{joc.nom}}</span>
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            <span *ngIf="joc.num_valoracions > 0; else noValoracions"
+                                id="valoracio">{{joc.total_valoracions
+                                / joc.num_valoracions | number:'1.1-1'}} ⭐</span>
+                            <ng-template #noValoracions><span id="valoracio">Cap valoració</span></ng-template>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>Afegit el: {{joc.data_afegit.toDate() | date:"dd/MM/yyyy HH:mm"}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </mat-list-item>
+        </mat-list>
+        <div class="botons" *ngIf="jocs.length > 4">
+            <button mat-raised-button color="primary" (click)="anterior('nous')" *ngIf="iniciNous != 0">
+                Anterior
+            </button>
+            <button mat-raised-button color="primary" (click)="seguent('nous')"
+                *ngIf="finalNous != jocs.length && finalNous != jocs.length + 1 && finalNous != jocs.length + 2 && finalNous != jocs.length + 3">
+                Següent
+            </button>
+        </div>
     </div>
-</div>
+    <div class="mitat">
+        <h1>Millor valoració</h1> <br>
+        <mat-list>
+            <mat-list-item *ngFor="let joc of jocsValoracio | ordenarValoracio | slice: iniciValoracio:finalValoracio">
+                <mat-card (click)="navegar(joc.nom)">
+                    <mat-card-header>
+                        <img mat-card-avatar [src]="joc.portada">
+                        <mat-card-title>
+                            <span>{{joc.nom}}</span>
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            <span *ngIf="joc.num_valoracions > 0; else noValoracions"
+                                id="valoracio">{{joc.total_valoracions
+                                / joc.num_valoracions | number:'1.1-1'}} ⭐</span>
+                            <ng-template #noValoracions><span id="valoracio">Cap valoració</span></ng-template>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>Afegit el: {{joc.data_afegit.toDate() | date:"dd/MM/yyyy HH:mm"}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </mat-list-item>
+        </mat-list>
+        <div class="botons" *ngIf="jocs.length > 4">
+            <button mat-raised-button color="primary" (click)="anterior('valoracio')" *ngIf="iniciValoracio != 0">
+                Anterior
+            </button>
+            <button mat-raised-button color="primary" (click)="seguent('valoracio')"
+                *ngIf="finalValoracio != jocs.length && finalValoracio != jocs.length + 1 && finalValoracio != jocs.length + 2 && finalValoracio != jocs.length + 3">
+                Següent
+            </button>
+        </div>
+    </div>
+</ng-template>

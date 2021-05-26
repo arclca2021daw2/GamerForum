@@ -20,6 +20,16 @@ export class UsuarisService {
     return data;
   }
 
+  async getUsuariByNom(nom: string) {
+    let usuari;
+    await this.firestore.collection('usuaris').ref.where('nom', '==', nom).get().then(query => {
+      query.forEach(doc => {
+        usuari = doc.data();
+      })
+    })
+    return usuari;
+  }
+
   createUsuari(usuari: Usuari) {
     delete usuari.passwd;
     return this.firestore.collection('usuaris').doc(usuari.correu).set(usuari);

@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavComponent implements OnInit {
 
+  jocsFiltrats;
   buscaForm = this.formBuilder.group({
     nom: ''
   });
@@ -36,14 +37,22 @@ export class NavComponent implements OnInit {
       } else {
         this.logged = false;
       }
-    })
+    });
   }
 
   ngOnInit() {
     this.jocsService.getJocs().subscribe(data => {
       this.jocs = data.map(e => {
         return {
-          id: e.payload.doc.id,
+         
+          ...e.payload.doc.data() as{}
+        } as Joc;
+      })
+    });
+    this.jocsService.getJocs().subscribe(data => {
+      this.jocsFiltrats = data.map(e => {
+        return {
+         
           ...e.payload.doc.data() as{}
         } as Joc;
       })
@@ -60,5 +69,9 @@ export class NavComponent implements OnInit {
   
   submit() {
     this.router.navigateByUrl(`/joc/${this.buscaForm.value.nom}`)
+  }
+
+  filtrar() {
+    this.jocsFiltrats = this.jocs.filter(joc => joc.nom.includes(this.buscaForm.value.nom));
   }
 }

@@ -20,7 +20,7 @@ const routes: Routes = [
   {path: 'registre', component: RegistreComponent},
   {path: 'reset-passwd', component: ResetPasswdComponent},
   {path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
-  {path: 'usuari/:correu', component: UsuariComponent, canActivate: [AuthGuard]},
+  {path: 'usuari/:nom', component: UsuariComponent, canActivate: [AuthGuard]},
 
   {path: '**', component: PageNotFoundComponent}
 ];

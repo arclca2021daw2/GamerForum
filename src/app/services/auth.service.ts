@@ -71,14 +71,17 @@ export class AuthService {
     })
   }
 
-  SignUp(email, password) {
-    return this.afAuth.createUserWithEmailAndPassword(email, password)
+  async SignUp(email: string, password: string) {
+    let correcte = true;
+    await this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
         this.router.navigate(['login']);
       }).catch((error) => {
         window.alert(error.message)
-      })
+        correcte = false;
+      });
+    return correcte;
   }
 
   ForgotPassword(passwordResetEmail) {
